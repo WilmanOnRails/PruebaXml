@@ -3,7 +3,7 @@ using System.Xml.Linq;
 
 Productos p = new Productos();
 p.productosPorDefecto();
-/*
+
 
                     //esto solo es un comentario que no afecta en nada
 XDocument doc = new XDocument(new XComment("Lista_de_Productos"),
@@ -21,14 +21,15 @@ XDocument doc = new XDocument(new XComment("Lista_de_Productos"),
 
     )));
 
-doc.Save(@"C:\Users\Wilman\source\repos\PruebaXml\BaseProductos.xml");
+doc.Save(Path.Combine(Directory.GetCurrentDirectory(), "BaseProductoass.xml"));
+Console.WriteLine(doc);
 
-*/
+/*
 //Console.WriteLine(doc);
 Console.WriteLine("\nmateneme");
 //cargar el archivo
 
-var path = @"C:\Users\Wilman\source\repos\PruebaXml\BaseProductos.xml";
+var path =  @"BaseProductos.xml";
 XDocument nose = XDocument.Load(path);
 
 //IEnumerable<string> productos = from produc in XDocument.Load(
@@ -43,3 +44,4 @@ foreach (var item in matenme)
 {
     Console.WriteLine(item.Element("Precio").Value);
 }
+*/
