@@ -19,6 +19,9 @@ CargarArchivo();
 
 static void generarArchivo(Productos pr)
 {
+
+
+
     //esto solo es un comentario que no afecta en nada
     XDocument doc = new XDocument(new XComment("Lista_de_Productos"),
         //Este es el Root element (el que va de primero)
@@ -35,14 +38,20 @@ static void generarArchivo(Productos pr)
 
         )));
 
-doc.Save(@"C:\Users\Wilman\source\repos\PruebaXml\BaseProductos.xml");
+    doc.Save(@"BaseProductos.xml");
+}
 
-*/
+
+static void CargarArchivo()
+{
+    
+
+
 //Console.WriteLine(doc);
 Console.WriteLine("\nmateneme");
 //cargar el archivo
 
-var path = @"C:\Users\Wilman\source\repos\PruebaXml\BaseProductos.xml";
+var path = @"BaseProductos.xml";
 XDocument nose = XDocument.Load(path);
 
 //IEnumerable<string> productos = from produc in XDocument.Load(
