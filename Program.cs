@@ -35,17 +35,15 @@ static void generarArchivo(Productos pr)
 
         )));
 
-    doc.Save(@"BaseProductos.xml");
-}
+doc.Save(@"C:\Users\Wilman\source\repos\PruebaXml\BaseProductos.xml");
 
-static void CargarArchivo()
-{
-    //cargar el archivo
+*/
+//Console.WriteLine(doc);
+Console.WriteLine("\nmateneme");
+//cargar el archivo
 
-var lol = Path.Combine(Directory.GetCurrentDirectory(), @"BaseProductos.xml" );
-var path = @"BaseProductos.xml";
-
-XDocument nose = XDocument.Load(lol);
+var path = @"C:\Users\Wilman\source\repos\PruebaXml\BaseProductos.xml";
+XDocument nose = XDocument.Load(path);
 
 //IEnumerable<string> productos = from produc in XDocument.Load(
 //@"C:\Users\Wilman\source\repos\PruebaXml\BaseProductos.xml").Element("Productos")
@@ -64,8 +62,3 @@ foreach (var item in matenme)
 }
 
 }
-
-
-
-//IEnumerable<XElement> matenme = from productos in nose.Element("Productos").Elements("Producto")
-//select productos;
