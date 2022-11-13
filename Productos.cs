@@ -31,6 +31,7 @@ namespace PruebaXml
             listaProductos.Add(new Productos(20, 13, "Rtx 4090"));
             listaProductos.Add(new Productos(36, 9, "ssd m.2 250gb"));
             listaProductos.Add(new Productos(99, 10, "Case gamer gigabyte"));
+            listaProductos.Add(new Productos(104, 15, "Intel 12900k"));
         }
 
         public Productos() { listaProductos = new List<Productos>(); }
