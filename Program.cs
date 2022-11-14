@@ -1,21 +1,47 @@
 ﻿using PruebaXml;
 using System.Xml.Linq;
+using System.Text.RegularExpressions;
 
 Productos p = new Productos();
 p.productosPorDefecto();
+
+// regex : (?<xdd>\w+:\\\w+)(?<xd>\\\w+)+\\\PruebaXml
 
 
 //generarArchivo(p);
 //Console.WriteLine(doc);
 
-Console.WriteLine(AppDomain.CurrentDomain.BaseDirectory);
+//Console.WriteLine(AppDomain.CurrentDomain.BaseDirectory);
+//Console.WriteLine(Directory.GetCurrentDirectory());
+
+Regex r = new Regex(@"(?<path1>\w+:\\\w+)(?<path2>\\\w+)+(?<path3>\\PruebaXml)");
+
+MatchCollection m = r.Matches(AppDomain.CurrentDomain.BaseDirectory);
+GroupCollection g = null;
+CaptureCollection c = null;
+foreach (Match item in m)
+{
+    c = item.Groups[2].Captures;
+    g = item.Groups;
+}
+
+string path = g["path1"].Value;
+
+foreach (Capture item in c)
+{
+    path += item.Value;
+}
+
+path += g["path3"].Value;
+
+Console.WriteLine(path);
 
 //FileAttributes atributos = File.GetAttributes(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"BaseProductos.xml"));
 //File.SetAttributes(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"BaseProductos.xml"),atributos | FileAttributes.Hidden );
 
-CargarArchivo();
+//CargarArchivo();
 
-
+// C:\Users\Wilman\source\repos\PruebaXml\bin\Debug\net6.0
 
 static void generarArchivo(Productos pr)
 {
@@ -44,16 +70,17 @@ static void generarArchivo(Productos pr)
 
 static void CargarArchivo()
 {
-    
+    //(?<xdd>\w+:\\\w+\\\w+)
 
 
-//Console.WriteLine(doc);
-Console.WriteLine("\nmateneme");
-//cargar el archivo
+    //Console.WriteLine(doc);
+    Console.WriteLine("\nmateneme");
+    //cargar el archivo
 
+    var lol = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"BaseProductos.xml");
 var path = @"BaseProductos.xml";
-XDocument nose = XDocument.Load(path);
-
+XDocument nose = XDocument.Load(lol);
+   
 //IEnumerable<string> productos = from produc in XDocument.Load(
 //@"C:\Users\Wilman\source\repos\PruebaXml\BaseProductos.xml").Element("Productos")
 //.Elements("Producto") select produc.Attribute("Nombre_Producto").Value;
