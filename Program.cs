@@ -3,6 +3,8 @@ using System.Xml.Linq;
 using System.Text.RegularExpressions;
 
 
+
+tarea:
 Task.Run(async () =>
 {
     Cliente C = new();
@@ -15,7 +17,15 @@ Task.Run(async () =>
 
 }).GetAwaiter().GetResult();
 
+switch (new Random().Next(0, 5))
+{
+    case 1: Console.WriteLine("ekisde"); break;
+    case 2: Console.WriteLine("lmao"); goto case 1;
+    case 3: Console.WriteLine("no se"); goto tarea;
 
+    default:
+        break;
+}
 
 
 

@@ -8,13 +8,20 @@ namespace PruebaXml
 {
     public class Cliente
     {
-        private static int id;
+        private int id;
 
+        [Obsolete("El apellido ya no es necesario en las nuevas versiones",true)]
+        public string Apellido { get; set; }
+       
         public int Id { get => id; }
 
         public string Name { get; set; }
         
         public string Origen { get; set; }
+
+        
+
+        private DataBase db;
 
         public Cliente() => id++;
   
@@ -42,6 +49,8 @@ namespace PruebaXml
         {
             int j=0;
 
+
+
             Thread.Sleep(15000);
 
             for (int i = 0; i < 100; i++)
@@ -50,6 +59,19 @@ namespace PruebaXml
             return j;
 
 
+        }
+
+        //asignando valores de un producto mediante una referencia
+        public static implicit operator Cliente(Productos p)
+        {
+            return new Cliente { id = p.Cantidad , Name = p.Nombre , Origen = p.Precio.ToString() };
+        }
+
+
+        public static Cliente operator +(Cliente c1, Productos c2)
+        {
+            c1 = new Cliente { id = c2.Cantidad, Name = c2.Nombre, Origen = c2.Precio.ToString() };
+            return c1;
         }
         
     }

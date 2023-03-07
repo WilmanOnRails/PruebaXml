@@ -8,10 +8,16 @@ using System.Xml.Linq;
 
 namespace PruebaXml
 {
-    public class DataBase
+   [Serializable] public class DataBase
     {
 
         private List<Cliente> listaClientes = new List<Cliente>();
+        private static List<Productos> listaProductos;
+
+        static DataBase()
+        {
+            listaProductos = new();
+        }
 
         public void CrearDocumento()
         {
@@ -76,10 +82,51 @@ namespace PruebaXml
         public void asegurarArchivo()
         {
             Console.WriteLine("encriptando...");
-           //  File.SetAttributes(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"DataBaseUsers.xml"),  FileAttributes.Hidden);
+            //  File.SetAttributes(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"DataBaseUsers.xml"),  FileAttributes.Hidden);
 
-            
+            Productos p = new Productos(12, 10, "wilman");
+
+            Cliente c = p;
+
+            // esto da error --->   c.Apellido = "lul";
+
+            var sth = getTupla("Hola", p); 
+
+    
+
             File.Encrypt(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"DataBaseUsers.xml"));
+        }
+
+        public void reflectClient(Cliente c)
+        {
+            var reflectedClient = typeof(Cliente).GetProperties();
+
+            foreach (var item in reflectedClient)
+            {
+                Console.WriteLine($"Nombre: {item.Name}, tipo: {item.GetType().ToString()}," +
+                    $" valor: {item.GetValue(c)?.ToString()}");
+                Console.WriteLine($"es mayor {longitudCaracteres(item.Name)}");
+            }
+
+        }
+
+        private string longitudCaracteres(string name) => name.Length switch
+        {
+            > 0 and <= 1 => "un caracter",
+            > 1 and <= 10 => "longitud normal",
+            > 10 and <= 15 => "Grande",
+            > 15 => "ENORME",
+            _ => ""
+        };
+        
+
+        public (Action<string> print,Action<Productos> increment) getTupla(string s,Productos p)
+        {
+            
+
+            Action<string> a = s => Console.WriteLine(s);
+            Action<Productos> pe = p => listaProductos.Add(p);
+            return (a,pe);
         }
     }
 }
